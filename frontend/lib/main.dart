@@ -3,7 +3,7 @@ import 'package:flutter_todo_app/dashboard.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'loginPage.dart';
-import 'package:flutter_todo_app/screens/login-screen.dart'; // Check your package name
+import 'package:flutter_todo_app/screens/auth/signup.dart'; // Check your package name
 
 void main() async {
    WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          home: const LoginScreen(), // We will create this next
+          home: const SignUpScreen(), // We will create this next
         );
       }
 }
