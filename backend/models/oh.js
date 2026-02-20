@@ -1,18 +1,20 @@
 const mongoose = require('mongoose');
 
-const OHSchema = new mongoose.Schema({
-    areaName: { type: String, required: true },
-    dayOfWeek: { type: String, required: true }, // e.g., "Segunda-Feira"
+const OhTaskSchema = new mongoose.Schema({
+    area: { type: mongoose.Schema.Types.ObjectId, ref: 'OhArea', required: true },
+    dayOfWeek: { 
+        type: String, 
+        required: true,
+        enum: ['Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado', 'Domingo']
+    },
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null }, // Referência ao User
     status: { 
         type: String, 
         enum: ['livre', 'ocupado', 'pendente', 'concluida'],
         default: 'livre' 
     },
-    assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
-    isPriority: { type: Boolean, default: false },
-    checklist: [{ type: String }], // Array of tasks
-    evidencePhoto: { type: String }, // URL to image (uploaded via ohs-upload.dart)
-    evaluatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    // Snapshot dos dados da área caso a definição mude, mas opcional
+    isPrioritySnapshot: { type: Boolean, default: false }
 });
 
-module.exports = mongoose.model('OH', OHSchema);
+module.exports = mongoose.model('OhTask', OhTaskSchema);
